@@ -1,0 +1,25 @@
+name: Semgrep CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Analyze code with Semgrep
+        run: semgrep --config .semgrep --verbose --severity warning --format json
+
+      - name: Format code
+        run: npm run format
+
+      - name: Lint code
+        run: npm run lint

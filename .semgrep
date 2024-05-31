@@ -1,0 +1,5 @@
+rules:
+  - id: sql-injection
+    patterns:
+      - "SELECT * FROM users WHERE id = ${(?i:[^}]+)}"
+    message: "SQL injection vulnerability detected"
